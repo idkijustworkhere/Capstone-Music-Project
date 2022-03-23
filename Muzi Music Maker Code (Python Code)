@@ -1,0 +1,165 @@
+def on_button_pressed_a():
+    global onoff
+    onoff = not (onoff)
+input.on_button_pressed(Button.A, on_button_pressed_a)
+
+volume = 0
+rotation_2 = 0
+rotation1 = 0
+onoff = False
+midi.use_raw_serial()
+
+def on_forever():
+    if onoff == True:
+        if rotation1 < -81:
+            midi.play_tone(131, music.beat(BeatFraction.HALF))
+        elif rotation1 > -81 and rotation1 < -72:
+            midi.play_tone(147, music.beat(BeatFraction.HALF))
+        elif rotation1 > -72 and rotation1 < -63:
+            midi.play_tone(165, music.beat(BeatFraction.HALF))
+        elif rotation1 > -63 and rotation1 < -54:
+            midi.play_tone(175, music.beat(BeatFraction.HALF))
+        elif rotation1 > -54 and rotation1 < -45:
+            midi.play_tone(196, music.beat(BeatFraction.HALF))
+        elif rotation1 > -45 and rotation1 < -36:
+            midi.play_tone(220, music.beat(BeatFraction.HALF))
+        elif rotation1 > -36 and rotation1 < -27:
+            midi.play_tone(247, music.beat(BeatFraction.HALF))
+        elif rotation1 > -27 and rotation1 < -18:
+            midi.play_tone(262, music.beat(BeatFraction.HALF))
+        elif rotation1 > -18 and rotation1 < -9:
+            midi.play_tone(294, music.beat(BeatFraction.HALF))
+        elif rotation1 > 0 and rotation1 < 9:
+            midi.play_tone(330, music.beat(BeatFraction.HALF))
+        elif rotation1 > -9 and rotation1 < 0:
+            midi.play_tone(349, music.beat(BeatFraction.HALF))
+        elif rotation1 < 18 and rotation1 > 9:
+            midi.play_tone(392, music.beat(BeatFraction.HALF))
+        elif rotation1 < 27 and rotation1 > 18:
+            midi.play_tone(440, music.beat(BeatFraction.HALF))
+        elif rotation1 < 36 and rotation1 > 27:
+            midi.play_tone(494, music.beat(BeatFraction.HALF))
+        elif rotation1 < 45 and rotation1 > 36:
+            midi.play_tone(523, music.beat(BeatFraction.HALF))
+        elif rotation1 < 54 and rotation1 > 45:
+            midi.play_tone(587, music.beat(BeatFraction.HALF))
+        elif rotation1 < 63 and rotation1 > 54:
+            midi.play_tone(659, music.beat(BeatFraction.HALF))
+        elif rotation1 < 72 and rotation1 > 63:
+            midi.play_tone(698, music.beat(BeatFraction.HALF))
+        elif rotation1 < 81 and rotation1 > 72:
+            midi.play_tone(784, music.beat(BeatFraction.HALF))
+        elif rotation1 > 81 and rotation1 < 90:
+            midi.play_tone(1046, music.beat(BeatFraction.HALF))
+        else:
+            music.stop_all_sounds()
+basic.forever(on_forever)
+
+def on_forever2():
+    if onoff == True:
+        if rotation_2 < -81:
+            midi.play_tone(131, music.beat(BeatFraction.HALF))
+        elif rotation_2 > -81 and rotation_2 < -72:
+            midi.play_tone(147, music.beat(BeatFraction.HALF))
+        elif rotation_2 > -72 and rotation_2 < -63:
+            midi.play_tone(165, music.beat(BeatFraction.HALF))
+        elif rotation_2 > -63 and rotation_2 < -54:
+            midi.play_tone(175, music.beat(BeatFraction.HALF))
+        elif rotation_2 > -54 and rotation_2 < -45:
+            midi.play_tone(196, music.beat(BeatFraction.HALF))
+        elif rotation_2 > -45 and rotation_2 < -36:
+            midi.play_tone(220, music.beat(BeatFraction.HALF))
+        elif rotation_2 > -36 and rotation_2 < -27:
+            midi.play_tone(247, music.beat(BeatFraction.HALF))
+        elif rotation_2 > -27 and rotation_2 < -18:
+            midi.play_tone(262, music.beat(BeatFraction.HALF))
+        elif rotation_2 > -18 and rotation_2 < -9:
+            midi.play_tone(294, music.beat(BeatFraction.HALF))
+        elif rotation_2 > 0 and rotation_2 < 9:
+            midi.play_tone(330, music.beat(BeatFraction.HALF))
+        elif rotation_2 > -9 and rotation_2 < 0:
+            midi.play_tone(349, music.beat(BeatFraction.HALF))
+        elif rotation1 < 18 and rotation_2 > 9:
+            midi.play_tone(392, music.beat(BeatFraction.HALF))
+        elif rotation_2 < 27 and rotation_2 > 18:
+            midi.play_tone(440, music.beat(BeatFraction.HALF))
+        elif rotation_2 < 36 and rotation_2 > 27:
+            midi.play_tone(392, music.beat(BeatFraction.HALF))
+        elif rotation_2 < 45 and rotation_2 > 36:
+            midi.play_tone(440, music.beat(BeatFraction.HALF))
+        elif rotation_2 < 54 and rotation_2 > 45:
+            midi.play_tone(494, music.beat(BeatFraction.HALF))
+        elif rotation_2 < 63 and rotation_2 > 54:
+            midi.play_tone(523, music.beat(BeatFraction.HALF))
+        elif rotation_2 < 72 and rotation_2 > 63:
+            midi.play_tone(587, music.beat(BeatFraction.HALF))
+        elif rotation_2 < 81 and rotation_2 > 72:
+            midi.play_tone(659, music.beat(BeatFraction.HALF))
+        elif rotation_2 > 81 and rotation_2 < 90:
+            midi.play_tone(784, music.beat(BeatFraction.HALF))
+        else:
+            music.stop_all_sounds()
+basic.forever(on_forever2)
+
+def on_forever3():
+    global volume
+    volume = 0.86 * pins.analog_read_pin(AnalogPin.P0)
+    if onoff == True:
+        if pins.analog_read_pin(AnalogPin.P0) > 60:
+            music.set_volume(volume)
+            midi.tone_on(music.volume())
+        else:
+            music.set_volume(0)
+        if volume > 100 and volume < 150:
+            basic.show_leds("""
+                . . . . .
+                                . . . . .
+                                # . . . .
+                                # # . . #
+                                # # # # #
+            """)
+            midi.tone_on(music.volume())
+        elif volume > 150 and volume < 200:
+            basic.show_leds("""
+                . . . . .
+                                # . . . .
+                                # # . . #
+                                # # # . #
+                                # # # # #
+            """)
+            midi.tone_on(music.volume())
+        elif volume > 200 and volume < 245:
+            basic.show_leds("""
+                # . . . .
+                                # # # . #
+                                # # # . #
+                                # # # # #
+                                # # # # #
+            """)
+        elif volume > 245:
+            basic.show_leds("""
+                # # # # #
+                                # # # # #
+                                # # # # #
+                                # # # # #
+                                # # # # #
+            """)
+            midi.tone_on(music.volume())
+        else:
+            basic.show_leds("""
+                . . . . .
+                                . . . . .
+                                . . . . .
+                                . . . . .
+                                . . . . .
+            """)
+            midi.tone_off(music.volume())
+    else:
+        music.stop_all_sounds()
+basic.forever(on_forever3)
+
+def on_forever4():
+    global rotation1, rotation_2
+    rotation1 = input.rotation(Rotation.ROLL) + 90
+    rotation_2 = input.rotation(Rotation.PITCH) + 90
+basic.forever(on_forever4)
